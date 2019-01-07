@@ -1,0 +1,9 @@
+<form action="" method = "POST">
+    {% csrf_token %}
+	<input type="hidden" name={{ incumbent.path }} value={{ incumbent.score }} />
+	<label>Incumbent: {{ incumbent.score }} </label>
+	<input type="submit" name="winner" value={{ incumbent.path }}>
+	<input type="hidden" name={{ challenger.path }} value={{ challenger.score }} />
+	<label>Challenger: {{ challenger.score }} </label>
+	<input type="submit" name="winner" value={{ challenger.path }}>
+</form>
