@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from .utils import elo
 
 # Create your views here.
-def main(request):
+def matchup(request):
 		
 
 	if (request.method == "GET"):
@@ -13,7 +13,7 @@ def main(request):
 		incumbent = Speech.objects.order_by("score").last()
 		new_challenger = Speech.objects.all().exclude(id = incumbent.id).order_by('?')[0]
 		
-		return render(request, "test.html", {"incumbent": incumbent, "challenger": new_challenger})
+		return render(request, "matchup.html", {"incumbent": incumbent, "challenger": new_challenger})
 		
 	elif(request.method == "POST"):
 		r = dict(request.POST) # request.POST.get('key', 0)
@@ -35,4 +35,10 @@ def main(request):
 
 		new_challenger = Speech.objects.all().exclude(id = incumbent.id).exclude(id = defeated.id).order_by('?')[0]
 
-		return render(request, "test.html", {"incumbent": incumbent, "challenger": new_challenger})
+		return render(request, "matchup.html", {"incumbent": incumbent, "challenger": new_challenger})
+
+def ranking(request):
+
+	ranked_list = Speech.objects.order_by("-score")
+
+	return render(request, "ranking.html", {"ranked_list": ranked_list})

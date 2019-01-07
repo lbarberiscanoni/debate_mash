@@ -22,5 +22,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('matchup/', views.main)
+    path('matchup/', views.matchup),
+    path('ranking/', views.ranking)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
