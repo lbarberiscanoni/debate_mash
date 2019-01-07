@@ -1,9 +1,27 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+{% load static %}
 <form action="" method = "POST">
     {% csrf_token %}
-	<input type="hidden" name={{ incumbent.path }} value={{ incumbent.score }} />
-	<label>Incumbent: {{ incumbent.score }} </label>
-	<input type="submit" name="winner" value={{ incumbent.path }}>
-	<input type="hidden" name={{ challenger.path }} value={{ challenger.score }} />
-	<label>Challenger: {{ challenger.score }} </label>
-	<input type="submit" name="winner" value={{ challenger.path }}>
+    <div class="row">
+    	<div class="col s6 m6 l6">
+    		<input type="hidden" name={{ incumbent.path }} value={{ incumbent.score }} />
+			{% with "matchup/"|add:incumbent.path|add:".mp4" as vid %}
+				<video class="responsive-video" controls>
+					<source src="{% static vid %}" type="video/mp4">
+				</video>
+			{% endwith %}
+			<label>Incumbent: {{ incumbent.score }} </label>
+			<input class="btn" type="submit" name="winner" value={{ incumbent.path }}>
+    	</div>
+	    <div class="col s6 m6 l6">
+		    <input type="hidden" name={{ challenger.path }} value={{ challenger.score }} />
+			{% with "matchup/"|add:challenger.path|add:".mp4" as vid %}
+				<video class="responsive-video" controls>
+					<source src="{% static vid %}" type="video/mp4">
+				</video>
+			{% endwith %}
+			<label>Challenger: {{ challenger.score }} </label>
+			<input class="btn" type="submit" name="winner" value={{ challenger.path }}>
+	    </div>
+    </div>
 </form>
