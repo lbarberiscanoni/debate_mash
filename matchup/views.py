@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Speech
 from django.core import serializers
 from django.shortcuts import redirect
+from .utils import elo
 
 # Create your views here.
 def main(request):
@@ -25,10 +26,13 @@ def main(request):
 		del r["csrfmiddlewaretoken"]
 		winner = r["winner"][0]
 		loser = [x for x in r.keys() if (x != "winner") and (x != winner) ][0]
-		
-		score_transfer = float(r[loser][0]) * .5
-		winner_score_new = float(r[winner][0]) + score_transfer
-		loser_score_new = float(r[loser][0]) - score_transfer
+
+		# score_transfer = float(r[loser][0]) * .5
+		# winner_score_new = float(r[winner][0]) + score_transfer
+		# loser_score_new = float(r[loser][0]) - score_transfer
+
+		winner_score_new = elo(float(r[winner][0]), float(r[loser][0]), 1)
+		loser_score_new = elo(float(r[winner][0]), float(r[loser][0]), 0)
 
 		incumbent = Speech.objects.get(path=winner)
 		defeated = Speech.objects.get(path=loser)
