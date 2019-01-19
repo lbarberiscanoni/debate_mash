@@ -1,27 +1,62 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-{% load static %}
-<form action="" method = "POST">
-    {% csrf_token %}
-    <div class="row">
-    	<div class="col s6 m6 l6">
-    		<input type="hidden" name={{ incumbent.path }} value={{ incumbent.score }} />
-			{% with "matchup/"|add:incumbent.path|add:".mp4" as vid %}
-				<video class="responsive-video" controls>
-					<source src="{% static vid %}" type="video/mp4">
-				</video>
-			{% endwith %}
-			<label>Incumbent: {{ incumbent.score }} </label>
-			<input class="btn" type="submit" name="winner" value={{ incumbent.path }}>
-    	</div>
-	    <div class="col s6 m6 l6">
-		    <input type="hidden" name={{ challenger.path }} value={{ challenger.score }} />
-			{% with "matchup/"|add:challenger.path|add:".mp4" as vid %}
-				<video class="responsive-video" controls>
-					<source src="{% static vid %}" type="video/mp4">
-				</video>
-			{% endwith %}
-			<label>Challenger: {{ challenger.score }} </label>
-			<input class="btn" type="submit" name="winner" value={{ challenger.path }}>
-	    </div>
-    </div>
-</form>
+<html>
+<head>
+	<title>Debate Matchups</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+	{% load static %}
+	<h3 class="center-align">Debate Matchups</h3>
+	<p class="center-align">Watch both videos and click on the one you liked the most</p>
+	<div class="container">
+		<form action="" method = "POST">
+		    {% csrf_token %}
+		    <div class="row">
+		    	<div class="col s6 m6 l6">
+		    		<div class="card">
+		    			<input type="hidden" name={{ incumbent.path }} value={{ incumbent.score }} />
+		    			<div class="card-image">
+		    				{% with "matchup/"|add:incumbent.path|add:".mp4" as vid %}
+								<video class="responsive-video" controls>
+									<source src="{% static vid %}" type="video/mp4">
+								</video>
+							{% endwith %}
+		    			</div>
+		    			<div class="card-content">
+		    				<h5>{{ incumbent.year }} {{ incumbent.division }} Finals</h5>
+		    			</div>
+						
+						<!-- <label>Incumbent: {{ incumbent.score }} </label> -->
+						<div class="card-action">
+							<button class="btn-large" type="submit" name="winner" value={{ incumbent.path }}>
+								This one is better
+							</button>
+						</div>
+		    		</div>
+		    	</div>
+			    <div class="col s6 m6 l6">
+		    		<div class="card">
+		    			<input type="hidden" name={{ challenger.path }} value={{ challenger.score }} />
+		    			<div class="card-image">
+		    				{% with "matchup/"|add:challenger.path|add:".mp4" as vid %}
+								<video class="responsive-video" controls>
+									<source src="{% static vid %}" type="video/mp4">
+								</video>
+							{% endwith %}
+		    			</div>
+		    			<div class="card-content">
+		    				<h5>{{ challenger.year }} {{ challenger.division }} Finals</h5>
+		    			</div>
+						
+						<!-- <label>Challenger: {{ challenger.score }} </label> -->
+						<div class="card-action">
+							<button class="btn-large" type="submit" name="winner" value={{ challenger.path }}>
+								This one is better
+							</button>
+						</div>
+		    		</div>
+			    </div>
+		    </div>
+		</form>
+	</div>
+</body>
+</html>
