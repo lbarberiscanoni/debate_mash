@@ -9,16 +9,25 @@ class Command(BaseCommand):
 
 		Speech.objects.all().delete()
 
-		videos = os.listdir("static/matchup")
+		subprocess.call("aws s3 ls s3://congress-rounds/ > video_list.txt", shell=True)
 
-		print(videos)
+		videos = []
+		with open("video_list.txt", "r") as f:
+			txt = f.read()
+			raw_list = txt.split("\n")
+			raw_list.pop(len(raw_list) - 1)
+
+			for x in raw_list:
+				el = [x for x in x.split(" ") if ".mp4" in x]
+				videos.append(el[0])
+
+		print(len(videos))
+		base_url = "https://s3-us-west-1.amazonaws.com/congress-rounds/"
 
 		for video in videos:
-
-			print(video, video.split("_"))
-
+			
 			Speech.objects.create(
-				path = video.replace(".mp4", ""),
+				path = base_url + video,
 				speaker = "unknown",
 				year = video.split("_")[1],
 				division = video.split("_")[0],

@@ -15,11 +15,9 @@
 		    		<div class="card">
 		    			<input type="hidden" name={{ incumbent.path }} value={{ incumbent.score }} />
 		    			<div class="card-image">
-		    				{% with "matchup/"|add:incumbent.path|add:".mp4" as vid %}
-								<video class="responsive-video" controls>
-									<source src="{% static vid %}" type="video/mp4">
-								</video>
-							{% endwith %}
+							<video class="responsive-video" controls>
+								<source src="{{ incumbent.path }}" type="video/mp4">
+							</video>
 		    			</div>
 		    			<div class="card-content">
 		    				<h5>{{ incumbent.year }} {{ incumbent.division }} Finals</h5>
@@ -37,11 +35,9 @@
 		    		<div class="card">
 		    			<input type="hidden" name={{ challenger.path }} value={{ challenger.score }} />
 		    			<div class="card-image">
-		    				{% with "matchup/"|add:challenger.path|add:".mp4" as vid %}
-								<video class="responsive-video" controls>
-									<source src="{% static vid %}" type="video/mp4">
-								</video>
-							{% endwith %}
+							<video class="responsive-video" controls>
+								<source src="{{ challenger.path }}" type="video/mp4">
+							</video>
 		    			</div>
 		    			<div class="card-content">
 		    				<h5>{{ challenger.year }} {{ challenger.division }} Finals</h5>

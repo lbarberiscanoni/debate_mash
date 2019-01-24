@@ -1,20 +1,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-{% load static %}
+<!-- {% load static %} -->
 {% for speech in ranked_list %}
-	{% with "matchup/"|add:speech.path|add:".mp4" as vid %}
-		<div class="row">
-			<div class="col s3 m3 l3"></div>
-			<div class="col s4 m4 l4">
-				<video class="responsive-video" controls>
-					<source src="{% static vid %}" type="video/mp4">
-				</video>
-			</div>
-			<div class="col s2 m2 l2">
-				<h3>{{ speech.speaker }}</h3>
-				<p>{{ speech.division}} {{ speech.year }}</p>
-				<h5>{{ speech.score }}</h5>
-			</div>
-			<div class="col s3 m3 l3"></div>
+	<div class="row">
+		<div class="col s3 m3 l3"></div>
+		<div class="col s4 m4 l4">
+			<video class="responsive-video" controls>
+				<source src="{{ speech.path }}" type="video/mp4">
+			</video>
 		</div>
-	{% endwith %}
+		<div class="col s2 m2 l2">
+			<h3>{{ speech.speaker }}</h3>
+			<p>{{ speech.division}} {{ speech.year }}</p>
+			<h5>{{ speech.score }}</h5>
+		</div>
+		<div class="col s3 m3 l3"></div>
+	</div>
 {% endfor %}
