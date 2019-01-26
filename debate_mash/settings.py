@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'matchup'
+    'matchup',
+    "mental_models"
 ]
 
 MIDDLEWARE = [

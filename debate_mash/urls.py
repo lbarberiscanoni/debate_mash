@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from matchup import views
+from matchup import views as matchup_views
+from mental_models import views as mental_model_views
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('matchup/', views.matchup),
-    path('ranking/', views.ranking)
+    path('matchup/', matchup_views.matchup),
+    path('ranking/', matchup_views.ranking),
+    path('mental_models/', mental_model_views.index)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
