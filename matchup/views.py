@@ -5,6 +5,9 @@ from django.shortcuts import redirect
 from .utils import elo
 
 # Create your views here.
+def index(request):
+	return render(request, "home.html")
+	
 def matchup(request):
 		
 
