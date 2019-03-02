@@ -26,5 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('matchup/', matchup_views.matchup),
     path('ranking/', matchup_views.ranking),
-    path('mental_models/', mental_model_views.index)
+    path('mental_models/', mental_model_views.index),
+    path("search/", matchup_views.search)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
